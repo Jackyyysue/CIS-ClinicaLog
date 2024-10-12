@@ -348,7 +348,7 @@
     <script>
       $(document).ready(function() {
         // Load Header
-        $("#header").load("header.php", function(response, status, xhr) {
+        $("#client_header").load("clientheader.php", function(response, status, xhr) {
           if (status == "error") {
             console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
           }
