@@ -251,7 +251,7 @@
     <div class="wrapper">
       <div class="main-panel" id="clientpanel">
         <!-- Header -->
-        <div class="main-header" id="header"></div>
+        <div class="main-header" id="client_header"></div>
         <!-- Main Content -->
         <div class="container" id="content">
           <div class="page-inner">

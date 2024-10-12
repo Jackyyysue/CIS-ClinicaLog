@@ -10810,11 +10810,11 @@ select {
    width: 100% !important;
 }
 
-#header {
+#client_header {
    width: 100% !important;
    background: #DB6079;
 }
 
-#header i{
+#client_header i{
    color: white;
 }
