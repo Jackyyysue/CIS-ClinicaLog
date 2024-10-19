@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/plugins.min.css" />
     <link rel="stylesheet" href="../css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="../css/client.css">
 
     <!-- ICONS -->
     <!-- Replaced the local Font Awesome link with CDN to prevent conflicts -->
