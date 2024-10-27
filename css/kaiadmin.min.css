@@ -10778,7 +10778,7 @@ body[data-background-color=dark] .jvm-zoom-btn {
 
 #InputInfo input,
 select {
-   border-color: #DA6F65 !important;
+   border-color: gray !important;
 }
 
 #InputInfo input[disabled],

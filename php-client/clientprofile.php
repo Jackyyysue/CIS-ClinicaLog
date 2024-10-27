@@ -92,7 +92,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Profile Details</h4>
+                  <h4 class="card-title">Account Settings</h4>
                 </div>
                 <div class="card-body">
                   <form action="change_password.php" method="POST" id="changePasswordForm" enctype="multipart/form-data">

@@ -217,7 +217,10 @@
                   <div class="u-text">
                     <h4>Jacky</h4>
                     <p class="text-muted">jmfurog@usep.edu.ph</p>
-                </div>
+                    <a
+                      href="clientviewprofile.php"
+                      class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                  </div>
               </li>
               <li>
                 <a class="dropdown-item" href="clientprofile.php">Account Setting</a>
