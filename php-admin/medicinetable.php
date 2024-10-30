@@ -22,7 +22,7 @@ $userData = $user->getUserData($user_id);
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
-    <link
+    <link 
       rel="icon"
       href="../assets/img/ClinicaLog.ico"
       type="image/x-icon"
@@ -194,7 +194,7 @@ $userData = $user->getUserData($user_id);
                                     <label>Expiration Date</label>
                                     <input
                                       id="addED"
-                                      name="addED"
+                                      name="addED" 
                                       type="date"
                                       class="form-control"
                                       placeholder="fill expiration date"
@@ -364,7 +364,7 @@ $userData = $user->getUserData($user_id);
                               // Check if the medicine is expired
                               $currentDate = date('Y-m-d');
                               $expirationStatus = (strtotime($node->medstock_expirationdt) < strtotime($currentDate)) ? 'Expired' : '';
-
+ 
                               echo "<tr data-id='{$node->medstock_id}' 
                                         data-name='{$node->medicine_name}' 
                                         data-qty='{$node->medstock_qty}' 
@@ -636,7 +636,7 @@ $("#edit-exit, #edit-close").click(function (e) {
                 Swal.fire({
                     title: "Error!",
                     text: message,
-                    icon: "error",
+                    icon: "error", 
                     confirmButtonText: "OK",
                     confirmButtonColor: "#dc3545" // Red
                 });
@@ -668,7 +668,7 @@ $("#edit-exit, #edit-close").click(function (e) {
                         $(this).addClass('active');
                     }
                 });
-            }
+            } 
         });
 
         $("#header").load("header.php", function(response, status, xhr) {

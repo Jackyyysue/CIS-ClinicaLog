@@ -10778,11 +10778,19 @@ body[data-background-color=dark] .jvm-zoom-btn {
 
 #InputInfo input,
 select {
-   border-color: gray !important;
+   border-color: #DA6F65 !important;
 }
 
 #InputInfo input[disabled],
 #InputInfo select[disabled] {
+   border-color: gray !important;
+   /* Gray border color */
+   border-width: 1px;
+   /* Thin border */
+   background-color: #f8f9fa;
+   /* Light background color for readonly fields */
+   color: #6c757d;
+   /* Text color for readonly fields */
    cursor: not-allowed;
    /* Cursor style to indicate read-only */
 }
@@ -10796,4 +10804,17 @@ select {
 .row #canceladdpatient {
    background-color: rebeccapurple !important;
    border-color: rebeccapurple !important;
+}
+
+#clientpanel {
+   width: 100% !important;
+}
+
+#client_header {
+   width: 100% !important;
+   background: #DB6079;
+}
+
+#client_header i{
+   color: white;
 }
