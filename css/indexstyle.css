@@ -23,12 +23,12 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 20px; /* Adds space between elements */
+    gap: 20px;
 }
 
 #logo {
-    width: 180px;
-    height: 70px;
+    width: 150px; /* Reduced width */
+    height: 60px; /* Reduced height */
     flex-shrink: 0;
 }
 
@@ -52,11 +52,11 @@ body {
 .button {
     background-color: #DA6F64;
     color: white;
-    width: 338px;
-    height: 74px;
+    width: 280px; /* Reduced width */
+    height: 60px; /* Reduced height */
     border: none;
-    border-radius: 37px;
-    font-size: 30px;
+    border-radius: 30px; /* Adjusted radius for smaller size */
+    font-size: 24px; /* Adjusted font size */
     cursor: pointer;
     display: inline-flex;
     align-items: center;
@@ -67,13 +67,13 @@ body {
 
 .button .arrow {
     margin-left: 10px;
-    font-size: 30px;
+    font-size: 24px; /* Adjusted font size */
 }
 
 @media (max-width: 480px) {
     #logo {
-        width: 120px;
-        height: 50px;
+        width: 100px;
+        height: 40px;
     }
 
     #name {
@@ -85,13 +85,13 @@ body {
     }
 
     .button {
-        width: 240px;
-        height: 54px;
-        font-size: 20px;
+        width: 200px;
+        height: 48px;
+        font-size: 18px;
     }
 
     .button .arrow {
-        font-size: 20px;
+        font-size: 18px;
     }
 }
 
