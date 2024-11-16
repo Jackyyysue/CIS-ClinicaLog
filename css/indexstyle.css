@@ -24,77 +24,137 @@ body {
     align-items: center;
     text-align: center;
     gap: 20px;
+    padding: 20px; /* Ensures spacing around content */
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
 }
 
 #logo {
-    width: 150px; /* Reduced width */
-    height: 60px; /* Reduced height */
+    width: 200px; 
+    height: auto; /* Maintains aspect ratio */
     flex-shrink: 0;
 }
 
 #name {
     color: #FFF;
-    font-family: Raleway;
-    font-size: 90px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 100px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
+    line-height: 0.8;
     margin: 0;
+    margin-bottom: 10%;
     margin-top: 10%;
 }
 
 .line1,
 .line2 {
     display: block;
+    font-size: 80px;
     line-height: 0;
 }
 
 .button {
     background-color: #DA6F64;
     color: white;
-    width: 280px; /* Reduced width */
-    height: 60px; /* Reduced height */
+    width: 240px; 
+    height: 50px; 
     border: none;
-    border-radius: 30px; /* Adjusted radius for smaller size */
-    font-size: 24px; /* Adjusted font size */
+    border-radius: 25px; /* Smooth rounded corners */
+    font-size: 20px; 
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    margin-top: 10%;
 }
 
 .button .arrow {
     margin-left: 10px;
-    font-size: 24px; /* Adjusted font size */
+    font-size: 20px;
 }
 
-@media (max-width: 480px) {
+/* Large Screens (Wider than 768px) */
+@media (max-width: 2650px) {
     #logo {
-        width: 100px;
-        height: 40px;
+        width: 200px;
+        height: auto;
     }
 
     #name {
-        font-size: 40px;
+        font-size: 100px;
     }
 
     .line1, .line2 {
-        font-size: 18px;
+        font-size: 80px;
     }
 
     .button {
         width: 200px;
-        height: 48px;
-        font-size: 18px;
-    }
-
-    .button .arrow {
+        height: 45px;
         font-size: 18px;
     }
 }
 
-img {
-    align-items: center;
+/* Medium Screens (Tablets and Smaller Desktops) */
+@media (max-width: 768px) {
+    body {
+        background-image: url("../assets/img/background-medium.png"); /* Optimized background for medium screens */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #logo {
+        width: 150px; /* Reduced size for smaller screens */
+        height: auto;
+    }
+
+    #name {
+        font-size: 80px; /* Adjusted font size for better fit */
+    }
+
+    .line1, .line2 {
+        font-size: 48px;
+    }
+
+    .button {
+        width: 200px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 480px) {
+    body {
+        background-image: url("../assets/img/background-small.png"); /* Optimized background for small screens */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #logo {
+        width: 120px; /* Further reduced size */
+        height: auto;
+    }
+
+    #name {
+        font-size: 32px; /* Smaller font size for mobile */
+    }
+
+    .line1, .line2 {
+        font-size: 24px; /* Adjusted font size */
+    }
+
+    .button {
+        width: 180px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .button .arrow {
+        font-size: 16px;
+    }
 }
