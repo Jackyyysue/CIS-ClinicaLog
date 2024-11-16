@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,18 +29,16 @@
       });
     </script>
 
-    <!-- CSS Files -->
+    <!-- CSS Files --> 
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/plugins.min.css" />
     <link rel="stylesheet" href="../css/kaiadmin.min.css" />
 
     <!-- ICONS -->
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-
     <style>
-      .sidebar {
+      .sidebar {  
           transition: background 0.3s ease;
-          /* Initial background */
+          /* Initial background */ 
           background: linear-gradient(to bottom, #DB6079, #DA6F65, #E29AB4);
       }
       .logo-header {
@@ -59,7 +60,7 @@
 <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" id="logo-header">
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
               <img
                 src="../assets/img/sidebar-logo.svg"
                 alt="navbar brand"
@@ -110,32 +111,44 @@
               </li>
               <li class="nav-item" id="patientrec-item">
                 <a href="addconsultation.php">
-                  <i class="fa fas fas fa-notes-medical"></i>
+                  <i class=" fas fa-stethoscope"></i>
                   <p>Consultations</p>
                 </a>
               </li>
               <li class="nav-item" id="appoint-item">
-                <a href="appointments.php">
-                  <i class="fas far fa-calendar-check"></i>
-                  <p>Appointments</p>
+                <a href="transactions.php">
+                  <i class="fas fas fa-receipt"></i>
+                  <p>Transactions</p>
                 </a>
+              </li>
+              <li class="nav-item" id="appoint-item">
+                <a href="offcampusadd.php">
+                  <i class="fas fas fa-arrow-alt-circle-right"></i>
+                  <p>Off-Campus Issuance</p>
+                </a>  
               </li>
               <li class="nav-item" id="inventory-item">
                 <a href="inventory.php">
                   <i class="fas fas fa-clipboard-list"></i>
-                  <p>Inventory</p> 
+                  <p>Medicine Report</p> 
                 </a>
               </li>
               <li class="nav-item" id="reports-item">
-                <a href="reports.php">
+                <a href="reports.php"> 
                   <i class="fas fas fa-file-medical"></i>
-                  <p>Reports</p>
+                  <p>Transaction Report</p>
                 </a>
               </li>
               <li class="nav-item" id="staffuser-item">
                 <a href="staffuser.php">
                   <i class="fas fa-users"></i>
                   <p>Clinic Staff User</p>
+                </a>
+              </li>
+              <li class="nav-item" id="reports-item">
+                <a href="adminlogs.php">
+                  <i class="fas fa-file-alt"></i>
+                  <p>Admin Logs</p>
                 </a>
               </li>
             </ul>

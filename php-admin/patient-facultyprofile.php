@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  header('Location: ../php-login/index.php'); 
+  exit; 
+}
+
+
 include('../database/config.php');
 include('../php/user.php');
 include('../php/medicine.php');
@@ -147,7 +153,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
                       <span id="lastName"></span><span>, </span><span id="firstName"></span> <span id="middleName"></span>
                     </h5>
                     <h5 style="color: #59535A; margin: 0;"><span id="college"></span></h5>
-                    <h5 style="color: #59535A; margin: 0;"><span id="department"></span></h5>
+                    <h5 style="color: #59535A; margin: 0;">Department <span id="department"></span></h5>
                     <h5 style="color: #59535A; margin: 0;"><span id="role"></span></h5>
                     <p style="color: #888888; margin-top: 5px;">Status: <span id="Status"></span></p>
                   </div>
@@ -223,165 +229,164 @@ if (isset($_SESSION['id']) && isset($_SESSION['type'])) {
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-    <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
+      <script src="../assets/js/core/jquery-3.7.1.min.js"></script>
+      <script src="../assets/js/core/popper.min.js"></script>
+      <script src="../assets/js/core/bootstrap.min.js"></script>
 
-    <!-- jQuery Scrollbar -->
-    <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+      <!-- jQuery Scrollbar -->
+      <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 
-    <!-- Chart JS -->
-    <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
+      <!-- Chart JS -->
+      <script src="../assets/js/plugin/chart.js/chart.min.js"></script>
 
-    <!-- jQuery Sparkline -->
-    <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+      <!-- jQuery Sparkline -->
+      <script src="../assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
 
-    <!-- Chart Circle -->
-    <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+      <!-- Chart Circle -->
+      <script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
 
-    <!-- Datatables -->
-    <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
+      <!-- Datatables -->
+      <script src="../assets/js/plugin/datatables/datatables.min.js"></script>
 
-    <!-- Bootstrap Notify -->
-    <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+      <!-- Bootstrap Notify -->
+      <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 
-    <!-- jQuery Vector Maps -->
-    <script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="../assets/js/plugin/jsvectormap/world.js"></script>
+      <!-- jQuery Vector Maps -->
+      <script src="../assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+      <script src="../assets/js/plugin/jsvectormap/world.js"></script>
 
-    <!-- Sweet Alert -->
-    <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+      <!-- Sweet Alert -->
+      <script src="../assets/js/plugin/sweetalert/sweetalert.min.js"></script>
 
-    <!-- Kaiadmin JS -->
-    <script src="../assets/js/kaiadmin.min.js"></script>
+      <!-- Kaiadmin JS -->
+      <script src="../assets/js/kaiadmin.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-      $(document).ready(function() {
-        // Dynamically load the sidebar
-        $("#sidebar").load("sidebar.php", function(response, status, xhr) {
-          if (status == "error") {
-            console.log("Error loading sidebar: " + xhr.status + " " + xhr.statusText);
-          }
-        });
-
-        $("#header").load("header.php", function(response, status, xhr) {
-          if (status == "error") {
-            console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
-          }
-        });
-
-        $("#medicalrecord").load("patientmedrecords.php", function(response, status, xhr) {
-          if (status == "error") {
-            console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
-          }
-        });
-
-
-        <?php if (isset($_SESSION['status']) && isset($_SESSION['message'])): ?>
-          var status = '<?php echo $_SESSION['status']; ?>';
-          var message = '<?php echo htmlspecialchars($_SESSION['message'], ENT_QUOTES); ?>';
-          Swal.fire({
-            title: status === 'success' ? "Success!" : "Error!",
-            text: message,
-            icon: status,
-            confirmButtonText: "OK",
-            confirmButtonColor: status === 'success' ? "#77dd77" : "#ff6961"
-          }).then(() => {
-            if (status === 'success') {
-              sessionStorage.clear();
-              window.location.href = "patient-facultyprofile.php";
+      <script>
+        $(document).ready(function() {
+          // Dynamically load the sidebar
+          $("#sidebar").load("sidebar.php", function(response, status, xhr) {
+            if (status == "error") {
+              console.log("Error loading sidebar: " + xhr.status + " " + xhr.statusText);
             }
-            <?php unset($_SESSION['status'], $_SESSION['message']); ?>
           });
-        <?php endif; ?>
 
-        function formatDateToWords(dateString) {
-          if (!dateString || (!dateString.includes('/') && !dateString.includes('-'))) {
-            return '';
+          $("#header").load("header.php", function(response, status, xhr) {
+            if (status == "error") {
+              console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
+            }
+          });
+
+          $("#medicalrecord").load("patientmedrecords.php", function(response, status, xhr) {
+            if (status == "error") {
+              console.log("Error loading header: " + xhr.status + " " + xhr.statusText);
+            }
+          });
+
+
+          <?php if (isset($_SESSION['status']) && isset($_SESSION['message'])): ?>
+            var status = '<?php echo $_SESSION['status']; ?>';
+            var message = '<?php echo htmlspecialchars($_SESSION['message'], ENT_QUOTES); ?>';
+            Swal.fire({
+              title: status === 'success' ? "Success!" : "Error!",
+              text: message,
+              icon: status,
+              confirmButtonText: "OK",
+              confirmButtonColor: status === 'success' ? "#77dd77" : "#ff6961"
+            }).then(() => {
+              if (status === 'success') {
+                sessionStorage.clear();
+                window.location.href = "patient-facultyprofile.php";
+              }
+              <?php unset($_SESSION['status'], $_SESSION['message']); ?>
+            });
+          <?php endif; ?>
+
+          function formatDateToWords(dateString) {
+            if (!dateString || (!dateString.includes('/') && !dateString.includes('-'))) {
+              return '';
+            }
+
+            const monthNames = [
+              "January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"
+            ];
+
+            dateString = dateString.replace(/-/g, '/');
+
+            const [year, month, day] = dateString.split('/');
+
+            if (!year || !month || !day) return '';
+
+            const monthName = monthNames[parseInt(month, 10) - 1];
+            const dayNumber = parseInt(day, 10);
+
+            if (!monthName || isNaN(dayNumber)) return '';
+
+            return `${monthName} ${dayNumber}, ${year}`;
           }
 
-          const monthNames = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-          ];
+          function calculateAge(dobString) {
+            if (!dobString) return '';
 
-          dateString = dateString.replace(/-/g, '/');
+            const dob = new Date(dobString);
+            const today = new Date();
 
-          const [year, month, day] = dateString.split('/');
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDifference = today.getMonth() - dob.getMonth();
 
-          if (!year || !month || !day) return '';
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+              age--;
+            }
 
-          const monthName = monthNames[parseInt(month, 10) - 1];
-          const dayNumber = parseInt(day, 10);
-
-          if (!monthName || isNaN(dayNumber)) return '';
-
-          return `${monthName} ${dayNumber}, ${year}`;
-        }
-
-        function calculateAge(dobString) {
-          if (!dobString) return '';
-
-          const dob = new Date(dobString);
-          const today = new Date();
-
-          let age = today.getFullYear() - dob.getFullYear();
-          const monthDifference = today.getMonth() - dob.getMonth();
-
-          if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
-            age--;
+            return age;
           }
 
-          return age;
-        }
+          function getOrdinalSuffix(num) {
+            const suffixes = ["th", "st", "nd", "rd"];
+            const value = num % 100;
+            return suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0];
+          }
 
-        function getOrdinalSuffix(num) {
-          const suffixes = ["th", "st", "nd", "rd"];
-          const value = num % 100;
-          return suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0];
-        }
+          // Passing PHP data to JavaScript
+          var patientData = <?php echo json_encode($patientDetails); ?>;
 
-        // Passing PHP data to JavaScript
-        var patientData = <?php echo json_encode($patientDetails); ?>;
+          function populatePatientForm(data) {
+            const dobFormatted = data.patient.patient_dob ? formatDateToWords(data.patient.patient_dob) : 'Ey';
+            const age = calculateAge(data.patient.patient_dob);
 
-        function populatePatientForm(data) {
-          const dobFormatted = data.patient.patient_dob ? formatDateToWords(data.patient.patient_dob) : 'Ey';
-          const age = calculateAge(data.patient.patient_dob);
+            $('#lastName').text(data.patient.patient_lname || '');
+            $('#firstName').text(data.patient.patient_fname || '');
+            $('#middleName').text(data.patient.patient_mname || '');
+            $('#dob').text(dobFormatted); 
+            $('#age').text(age); 
+            $('#sex').text(data.patient.patient_sex || 'Male');
+            $('#facultyID').text(data.faculty.faculty_idnum || '');
+            $('#college').text(data.faculty.faculty_college || ''); 
+            $('#department').text(data.faculty.faculty_department || ''); 
+            $('#role').text(data.faculty.faculty_role);
+            $('#region').text(data.address.address_region || '');
+            $('#province').text(data.address.address_province || '');
+            $('#municipality').text(data.address.address_municipality || '');
+            $('#barangay').text(data.address.address_barangay || '');
+            $('#street').text(data.address.address_prkstrtadd || '');
+            $('#email').text(data.patient.patient_email || '');
+            $('#contactNumber').text(data.patient.patient_connum || '');
+            $('#emergencyContactName').text(data.emergencyContact.emcon_conname || '');
+            $('#relationship').text(data.emergencyContact.emcon_relationship || '');
+            $('#emergencyContactNumber').text(data.emergencyContact.emcon_connum || '');
+            $('#Status').text(data.patient.patient_status || '');
+            $('#profilePic').attr('src', `uploads/${data.patient.patient_profile}` || 'default-image.jpg');
+          }
 
-          $('#lastName').text(data.patient.patient_lname || '');
-          $('#firstName').text(data.patient.patient_fname || '');
-          $('#middleName').text(data.patient.patient_mname || '');
-          $('#dob').text(dobFormatted);
-          $('#age').text(age);
-          $('#sex').text(data.patient.patient_sex || 'Male');
-          $('#facultyID').text(data.faculty.faculty_idnum || '');
-          $('#college').text(data.faculty.faculty_college || '');
-          $('#department').text(data.faculty.faculty_department || '');
-          $('#role').text(data.faculty.faculty_role);
-          $('#region').text(data.address.address_region || '');
-          $('#province').text(data.address.address_province || '');
-          $('#municipality').text(data.address.address_municipality || '');
-          $('#barangay').text(data.address.address_barangay || '');
-          $('#street').text(data.address.address_prkstrtadd || '');
-          $('#email').text(data.patient.patient_email || '');
-          $('#contactNumber').text(data.patient.patient_connum || '');
-          $('#emergencyContactName').text(data.emergencyContact.emcon_conname || '');
-          $('#relationship').text(data.emergencyContact.emcon_relationship || '');
-          $('#emergencyContactNumber').text(data.emergencyContact.emcon_connum || '');
-          $('#Status').text(data.patient.patient_status || '');
-          $('#profilePic').attr('src', `uploads/${data.patient.patient_profile}` || 'default-image.jpg');
-        }
-
-        populatePatientForm(patientData);
-      });
-    </script>
+            populatePatientForm(patientData);
+          
+        });
+      </script>
 </body>
 
 </html>

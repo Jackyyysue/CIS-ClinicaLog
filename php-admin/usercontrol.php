@@ -1,17 +1,23 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: ../php-login/index.php'); 
+    exit; 
+  }
+  
+
 include('../database/config.php');
 include('../php/user.php');
 
 $db = new Database();
 $conn = $db->getConnection();
 $user = new User($conn);
-
+$password = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['addstaff'])) {
         
-        $id = $_POST['addid'];
+        $id = trim($_POST['addid']);
         $first_name = $_POST['addfname'];
         $last_name = $_POST['addlname'];
         $middle_name = $_POST['addmname'];
@@ -20,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role = $_POST['addrole'];
         $status = $_POST['addstatus'];
         $dateadded = date('Y-m-d H:i:s');
-        $password = password_hash($id, PASSWORD_DEFAULT);  
-        $code = 0;
+        $password = password_hash($id, PASSWORD_BCRYPT);  
+        $code = 0; 
 
         $user_profile = '';
         if (isset($_FILES['addprofile']) && $_FILES['addprofile']['error'] === UPLOAD_ERR_OK) {

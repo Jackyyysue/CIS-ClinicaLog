@@ -4,8 +4,8 @@ include('../database/config.php');
 include('../php/user.php');
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: login.php'); 
-    exit;
+  header('Location: ../php-login/index.php'); 
+  exit; 
 }
 
 $db = new Database();
@@ -26,7 +26,7 @@ $userData = $user->getUserData($user_id);
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
-      WebFont.load({
+      WebFont.load({ 
         google: { families: ["Public Sans:300,400,500,600,700"] },
         custom: {
           families: [

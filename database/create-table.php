@@ -12,7 +12,7 @@
 
     $sql = "CREATE DATABASE IF NOT EXISTS $dbname";
     if(mysqli_query($conn, $sql)){
-        echo "Database created successfully<br>";
+        echo "Database created successfully<br>"; 
     }else{ 
         echo "Error creating database: " . mysqli_error($conn) . "<br>";
     }
@@ -20,9 +20,9 @@
     mysqli_close($conn);
 
     $conn = mysqli_connect($servername, $username, $password, $dbname); 
-
+ 
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error()); 
+        die("Connection failed: " . mysqli_connect_error());  
     } else {
         echo "Connected to database $dbname successfully<br>";
     }
@@ -56,7 +56,7 @@
         $admin_dateadded = date('Y-m-d');
         $admin_profile = '35e3a37ab3e5a98b04b63f4b4c3697fd.jpg';  
         $admin_password = password_hash('admin123', PASSWORD_BCRYPT); 
-        $admin_code = 0; 
+        $admin_code = 0;  
 
         $checkAdmin = "SELECT * FROM staffusers WHERE user_id = '$admin_id' OR user_email = '$admin_email'";
         $result = mysqli_query($conn, $checkAdmin);
@@ -83,7 +83,7 @@
     }
 
     // Create the 'medicine' table
-    $sql_medicine = "CREATE TABLE IF NOT EXISTS medicine (
+    $sql_medicine = "CREATE TABLE medicine (
         medicine_id INT AUTO_INCREMENT PRIMARY KEY,
         medicine_name VARCHAR(100) NOT NULL UNIQUE, 
         medicine_category VARCHAR(50) NOT NULL
@@ -96,9 +96,10 @@
     }
 
     // Create the 'medstock' table with foreign key to 'medicine'
-    $sql_medstock = "CREATE TABLE IF NOT EXISTS medstock (
+    $sql_medstock = "CREATE TABLE medstock (
         medstock_id INT AUTO_INCREMENT PRIMARY KEY,  
-        medicine_id INT NOT NULL,                   
+        medicine_id INT NOT NULL, 
+        medstock_unit VARCHAR(10),          
         medstock_qty INT NOT NULL,
         medstock_dosage VARCHAR(50),
         medstock_dateadded DATE,
@@ -124,7 +125,7 @@
         patient_email VARCHAR(255) NOT NULL,
         patient_connum int(12) NOT NULL,
         patient_sex ENUM('Male', 'Female') NOT NULL,   
-        patient_profile VARCHAR(255),
+        patient_profile VARCHAR(255), 
         patient_patienttype ENUM('Student', 'Faculty', 'Staff', 'Extension') NOT NULL,
         patient_dateadded DATE,
         patient_password VARCHAR(60) NOT NULL,    
@@ -200,7 +201,7 @@
         echo "Error creating table 'extension': " . mysqli_error($conn) . "<br>";
     }
 
-    // Create the 'addresses' table
+    // Create the 'addresses' table 
     $sql_addresses = "CREATE TABLE IF NOT EXISTS pataddresses (
         address_id INT AUTO_INCREMENT PRIMARY KEY,
         address_patientid INT NOT NULL,
@@ -216,7 +217,7 @@
     } else {
         echo "Error creating table 'addresses': " . mysqli_error($conn) . "<br>";
     }
-
+ 
     // Create the 'emergency_contacts' table
     $sql_emergency_contacts = "CREATE TABLE IF NOT EXISTS patemergencycontacts (
         emcon_contactid INT AUTO_INCREMENT PRIMARY KEY,
@@ -233,26 +234,39 @@
     }
 
     // Create the 'consultations' table
-    $sql_consultations = "CREATE TABLE IF NOT EXISTS consultations (
-        consultation_id INT AUTO_INCREMENT PRIMARY KEY,
-        patient_idnum INT NOT NULL, 
-        diagnosis VARCHAR(255) NOT NULL,
-        medstock_id INT NOT NULL,
-        treatment_medqty INT NOT NULL,
-        treatment_notes VARCHAR(255) NOT NULL,
-        remark VARCHAR(255) NOT NULL,
+    $sql_consultations = "CREATE TABLE consultations (
+        consult_id INT AUTO_INCREMENT PRIMARY KEY,
+        consult_patientid INT NOT NULL, 
+        consult_diagnosis VARCHAR(255) NOT NULL,
+        consult_treatmentnotes VARCHAR(255) NOT NULL,
+        consult_remark VARCHAR(255) NOT NULL,
         consult_date DATE,
-        time_in VARCHAR(255),
-        time_out VARCHAR(255),
-        time_spent VARCHAR(255),
-        FOREIGN KEY (patient_idnum) REFERENCES patients(patient_id),
-        FOREIGN KEY (medstock_id) REFERENCES medstock(medstock_id)
+        consult_timein TIME,
+        consult_timeout TIME,
+        consult_timespent INT,
+        FOREIGN KEY (consult_patientid) REFERENCES patients(patient_id)
     )";
-    
+
     if (mysqli_query($conn, $sql_consultations)) {
         echo "Table 'consultations' created successfully<br>";
     } else {
         echo "Error creating table 'consultations': " . mysqli_error($conn) . "<br>";
+    }
+
+    // Create the 'prescribemed' table
+    $sql_consultations = "CREATE TABLE prescribemed (
+        pm_id INT AUTO_INCREMENT PRIMARY KEY,
+        pm_consultid INT NOT NULL,
+        pm_medstockid INT NOT NULL,
+        pm_medqty INT NOT NULL,
+        FOREIGN KEY (pm_consultid) REFERENCES consultations(consult_id),
+        FOREIGN KEY (pm_medstockid) REFERENCES medstock(medstock_id)
+    )";
+
+    if (mysqli_query($conn, $sql_consultations)) {
+        echo "Table 'prescribemed' created successfully<br>";
+    } else {
+        echo "Error creating table 'prescribemed': " . mysqli_error($conn) . "<br>";
     }
 
     // Create the 'medicalrecords' table
@@ -271,6 +285,41 @@
     } else {
         echo "Error creating table 'medicalrecords': " . mysqli_error($conn) . "<br>";
     }
+
+    // Create the 'medicalrecords' table
+    $sql_medissued = "CREATE TABLE IF NOT EXISTS medissued (
+        mi_id INT AUTO_INCREMENT PRIMARY KEY,
+        mi_medstockid INT NOT NULL,
+        mi_medqty INT NOT NULL,
+        mi_date DATE,
+        FOREIGN KEY (mi_medstockid) REFERENCES medstock(medstock_id)
+    )";
+    
+    if (mysqli_query($conn, $sql_medissued)) {
+        echo "Table 'medissued' created successfully<br>";
+    } else {
+        echo "Error creating table 'medicalrecords': " . mysqli_error($conn) . "<br>";
+    }
+
+    //Create the 'transaction' table
+    $sql_transaction = "CREATE TABLE IF NOT EXISTS transactions (
+        transac_id INT AUTO_INCREMENT PRIMARY KEY,
+        transac_patientid INT NOT NULL,
+        transac_purpose VARCHAR(50), 
+        transac_date DATE,
+        transac_in TIME,
+        transac_out TIME,
+        transac_spent INT,
+        transac_status ENUM('Pending', 'Progress', 'Done') NOT NULL,
+        FOREIGN KEY (transac_patientid) REFERENCES patients(patient_id)
+    )";
+
+    if (mysqli_query($conn, $sql_transaction)) {
+        echo "Table 'transaction' created successfully<br>";
+    } else {
+        echo "Error creating table 'transaction': " . mysqli_error($conn) . "<br>";
+    }
+
 
 mysqli_close($conn);
 ?>

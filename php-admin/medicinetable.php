@@ -4,6 +4,12 @@ include('../database/config.php');
 include('../php/user.php');
 include('../php/medicine.php');
 
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  header('Location: ../php-login/index.php'); 
+  exit; 
+}
+
+
 $db = new Database();
 $conn = $db->getConnection();  
 
@@ -339,7 +345,7 @@ $userData = $user->getUserData($user_id);
                                 <th>Name</th>
                                 <th>Quantity</th>
                                 <th>Dosage Strength</th>
-                                <th>Date & Time Added</th>
+                                <th>Date & Time Added</th> 
                                 <th>Expiration Date</th>
                                 <th>Status</th> <!-- Column for Disable status -->
                                 <th>Action</th>

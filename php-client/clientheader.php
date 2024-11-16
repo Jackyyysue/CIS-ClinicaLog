@@ -1,3 +1,27 @@
+<?php
+session_start();
+include('../database/config.php');
+include '../php/patient.php';
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: login.php'); 
+    exit;
+}
+
+$db = new Database();
+$conn = $db->getConnection();
+
+$patient_id = $_SESSION['patuser_id'];
+$patient_type = $_SESSION['patuser_type'];
+
+$patient = new PatientManager($conn);
+$patientData = $patient->getPatientData($patient_id); 
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -195,14 +219,14 @@
             aria-expanded="false">
             <div class="avatar-sm">
               <img
-                src="../assets/img/profile.jpg"
-                alt="..."
+              src='/php-admin/uploads/<?php echo ($patientData->patient_profile); ?>'
+              alt="..."
                 class="avatar-img rounded-circle" />
             </div>
             <span class="profile-username">
               <span class="op-7">Hi,</span>
-              <span class="fw-bold">Jacky</span>
-            </span>
+              <span class="fw-bold"><?php echo ($patientData->patient_fname); ?></span>
+              </span>
           </a>
           <ul class="dropdown-menu dropdown-user animated fadeIn">
             <div class="dropdown-user-scroll scrollbar-outer">
@@ -210,13 +234,13 @@
                 <div class="user-box">
                   <div class="avatar-lg">
                     <img
-                      src="../assets/img/profile.jpg"
-                      alt="image profile"
+                    src='/php-admin/uploads/<?php echo ($patientData->patient_profile); ?>'
+                    alt="image profile"
                       class="avatar-img rounded" />
                   </div>
                   <div class="u-text">
-                    <h4>Jacky</h4>
-                    <p class="text-muted">jmfurog@usep.edu.ph</p>
+                    <h4><?php echo ($patientData->patient_fname); ?></h4>
+                    <p class="text-muted"><?php echo ($patientData->patient_email); ?></p>
                     <a
                       href="clientviewprofile.php"
                       class="btn btn-xs btn-secondary btn-sm">View Profile</a>

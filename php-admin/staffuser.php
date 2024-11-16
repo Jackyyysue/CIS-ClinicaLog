@@ -4,8 +4,8 @@ include('../database/config.php');
 include('../php/user.php');
  
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: login.php'); 
-    exit;
+    header('Location: ../php-login/index.php'); 
+    exit; 
 }
 
 $db = new Database();
@@ -19,7 +19,7 @@ $userData = $user->getUserData($user_id);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
     <title>Clinic Staff User</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" /> 
     <link rel="icon" href="../assets/img/ClinicaLog.ico" type="image/x-icon"/>
@@ -369,7 +369,7 @@ $userData = $user->getUserData($user_id);
                                   <td>{$node->user_dateadded}</td>
                                   <td>
                                       <span style='
-                                          display: inline-block;
+                                          display: inline-block; 
                                           padding: 5px 10px;
                                           border-radius: 50px;
                                           background-color: {$statusColor};
@@ -536,7 +536,7 @@ $userData = $user->getUserData($user_id);
                                 confirm: {
                                     className: "btn btn-success",
                                 },
-                            },
+                            }, 
                         });
                     } else {
                         swal({

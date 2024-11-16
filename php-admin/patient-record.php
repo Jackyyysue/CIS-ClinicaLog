@@ -1,9 +1,17 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  header('Location: ../php-login/index.php'); 
+  exit; 
+}
+
+
 include('../database/config.php');
-include('../php/user.php');
+include('../php/user.php'); 
 include('../php/medicine.php');
 include('../php/patient.php');
+include('../php/patienttables.php');
 
 
 $db = new Database();
@@ -27,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       if ($action === 'view') {
           switch ($type) {
-              case 'Student':
+              case 'Student': 
                   $redirectUrl = 'patient-studprofile.php';
                   break;
               case 'Faculty':
@@ -136,26 +144,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="page-inner">
               <div class="row">
                 <div class="col-md-12">
-                  <div>
-
+                <div>
                   <ul class="nav nav-pills nav-secondary nav-pills-no-bd" id="pills-tab-without-border" role="tablist">
                     <li>
-                      <a class="nav-link active" href="" role="tab">All</a>
+                      <a class="nav-link active" href="patient-record.php" role="tab">All</a>
                     </li>
                     <li>
-                      <a class="nav-link" href="" role="tab">Student</a>
+                      <a class="nav-link" href="patient-recordstud.php" role="tab">Student</a>
                     </li>
                     <li>
-                      <a class="nav-link" href="" role="tab">Faculty</a>
+                      <a class="nav-link" href="patient-recordfac.php" role="tab">Faculty</a>
                     </li>
                     <li>
-                      <a class="nav-link" href="" role="tab">Staff</a>
+                      <a class="nav-link" href="patient-recordstaff.php" role="tab">Staff</a>
                     </li>
                     <li>
-                      <a class="nav-link" href="" role="tab">Extension</a>
+                      <a class="nav-link" href="patient-recordexten.php" role="tab">Extension</a>
                     </li>
                   </ul>
-
                     </div>
                 </div>
               </div>
@@ -259,13 +265,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </tfoot>
                         <tbody> 
                         <?php
-                        $nodes = $patient->getAllPatientsTable();
+                        $patientTables = new PatientTablesbyType($conn);
+                        $nodes = $patientTables->getAllTable();
                         $index = 0; 
 
                         foreach ($nodes as $node) {
                             
                             $disableStatus = isset($node->status) && $node->status == 'Inactive' ? 'Disabled' : 'Enabled';
                             $statusColor = isset($node->status) && $node->status == 'Inactive' ? '#ff6961' : '#77dd77';
+                            $node->name = "{$node->fname} " . (!empty($node->mname) ? "{$node->mname} " : "") . "{$node->lname}";
 
                             $index++;
 
@@ -276,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         data-type='{$node->type}' 
                                         data-status='{$node->status}' class='patient-row'>
                                   <td>{$index}</td> <!-- For No. column -->
-                                  <td>{$node->id}</td>
+                                  <td>{$node->idnum}</td>
                                   <td>{$node->name}</td>
                                   <td>{$node->email}</td>
                                   <td>{$node->sex}</td>
@@ -394,7 +402,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     const type = this.getAttribute('data-type');
                     const action = this.classList.contains('viewButton') ? 'view' : 'edit';
 
-                    // Create the AJAX request
                     const xhr = new XMLHttpRequest();
                     xhr.open('POST', '', true); // POST to the same page
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -403,7 +410,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             try {
                                 const response = JSON.parse(xhr.responseText); // Parse JSON response
                                 if (response.status === 'success') {
-                                    // Redirect based on the server response
                                     window.location.href = response.redirect;
                                 } else if (response.status === 'error') {
                                     console.error(response.message); // Handle error messages

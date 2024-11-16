@@ -3,41 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program Selection</title>
-    <style>
-        .form-control {
-            width: 300px;
-            padding: 10px;
-            margin: 10px 0;
-        }
-    </style>
+    <title>Monthly Transactions Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-    <!-- Dropdown to select a program -->
-    <label for="program">Select a Program:</label>
-    <select class="form-select form-control" id="program" name="program">
-        <option value="Click to type...">Click to type...</option>
-        <option value="Bachelor of Science in Secondary Education">Bachelor of Science in Secondary Education</option>
-        <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
-        <option value="Bachelor of Science in Agricultural and Biosystems Engineering">Bachelor of Science in Agricultural and Biosystems Engineering</option>
-        <option value="Bachelor of Technical-Vocational Education">Bachelor of Technical-Vocational Education</option>
-        <option value="Bachelor of Special Needs Education">Bachelor of Special Needs Education</option>
-        <option value="Bachelor of Early Childhood Education">Bachelor of Early Childhood Education</option>
-        <option value="Bachelor of Elementary Education">Bachelor of Elementary Education</option>
+    <h2>Monthly Transactions by Patient Type</h2>
+    
+    <!-- Dropdown for selecting the year -->
+    <label for="yearSelect">Select Year:</label>
+    <select id="yearSelect" onchange="loadDataForYear(this.value)">
+        <!-- JavaScript will populate the options here -->
     </select>
+    
+    <!-- Chart canvas -->
+    <canvas id="transactionChart" width="400" height="200"></canvas>
 
-    <!-- Optional: JavaScript to handle dropdown selection -->
-    <script>
-        document.getElementById('program').addEventListener('change', function() {
-            const selectedProgram = this.value;
-            if (selectedProgram === 'Click to type...') {
-                alert('Please enter your own program manually.');
-            } else {
-                alert('You selected: ' + selectedProgram);
-            }
-        });
-    </script>
-
+    <!-- Link to JavaScript file -->
+    <script src="sample3.js"></script>
 </body>
 </html>
