@@ -34,6 +34,7 @@ body {
     width: 200px; 
     height: auto; /* Maintains aspect ratio */
     flex-shrink: 0;
+    margin-left: -40px;
 }
 
 #name {
@@ -138,14 +139,15 @@ body {
     #logo {
         width: 120px; /* Further reduced size */
         height: auto;
+        margin-left: -17px;
     }
 
     #name {
-        font-size: 32px; /* Smaller font size for mobile */
+        font-size: 42px; /* Smaller font size for mobile */
     }
 
     .line1, .line2 {
-        font-size: 24px; /* Adjusted font size */
+        font-size: 32px; /* Adjusted font size */
     }
 
     .button {
