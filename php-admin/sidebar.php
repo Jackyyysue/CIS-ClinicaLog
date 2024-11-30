@@ -124,7 +124,7 @@ session_start();
               <li class="nav-item" id="appoint-item">
                 <a href="offcampusadd.php">
                   <i class="fas fas fa-arrow-alt-circle-right"></i>
-                  <p>Off-Campus Issuance</p>
+                  <p>Mabini Unit Issuance</p>
                 </a>  
               </li>
               <li class="nav-item" id="inventory-item">

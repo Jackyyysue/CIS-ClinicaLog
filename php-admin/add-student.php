@@ -86,9 +86,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     <h4 class="card-title">Personal Details</h4>
                   </div>
                 </div>
-                <div class="card-body" id="InputInfo">
+                <div class="card-body">
                   <!-- Form Starts Here -->
-                  <form id="studentForm" action="patientcontrol.php" method="POST" enctype="multipart/form-data"> <!-- Name Fields -->
+                  <form id="studentForm" action="patientcontrol.php" method="POST" enctype="multipart/form-data" novalidate>
+                    <!-- Name Fields -->
                     <div class="row">
                       <div class="col-md-3 mb-3">
                         <label for="Profile" class="form-label">Profile Upload</label>
@@ -99,19 +100,23 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <div class="col-md-3 mb-3">
                         <label for="lastName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" required />
+                        <div class="invalid-feedback">Last name is required.</div>
                       </div>
                       <div class="col-md-3 mb-3">
                         <label for="firstName" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" required />
+                        <div class="invalid-feedback">First name is required.</div>
                       </div>
                       <div class="col-md-2 mb-3">
                         <label for="middleName" class="form-label">Middle Name</label>
                         <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Enter middle name" />
                       </div>
+
                       <!-- Date of Birth -->
                       <div class="col-md-2 mb-3">
                         <label for="dob" class="form-label">Date of Birth</label>
                         <input type="date" class="form-control" id="dob" name="dob" required />
+                        <div class="invalid-feedback">Date of birth is required.</div>
                       </div>
                       <div class="col-md-2 mb-3">
                         <label for="sex" class="form-label">Sex</label>
@@ -120,6 +125,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                           <option value="Female">Female</option>
                           <option value="Male">Male</option>
                         </select>
+                        <div class="invalid-feedback">Please select a gender.</div>
                       </div>
                     </div>
 
@@ -128,101 +134,93 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <div class="col-md-2 mb-3">
                         <label for="studentID" class="form-label">ID Number</label>
                         <input type="text" class="form-control" id="studentID" name="studentID" placeholder="Enter ID number" required />
+                        <div class="invalid-feedback">ID number is required.</div>
                       </div>
-
-                      <!-- Program Dropdown -->
                       <div class="col-md-4 mb-3">
                         <label for="program" class="form-label">Program</label>
-                        <select class="form-select  form-control" id="program" name="program" required>
+                        <select class="form-select form-control" id="program" name="program" required>
                           <option value="">Select or add a program</option>
-                          <!-- Add more programs as needed -->
                         </select>
+                        <div class="invalid-feedback">Please select a program.</div>
                       </div>
-
-                      <!-- Major Dropdown -->
                       <div class="col-md-2 mb-3">
                         <label for="major" class="form-label">Major</label>
-                        <select class="form-select  form-control" id="major" name="major" required>
+                        <select class="form-select form-control" id="major" name="major" required>
                           <option value="">Select or add a major</option>
-                          <!-- Major options will be dynamically populated based on the Program -->
                         </select>
+                        <div class="invalid-feedback">Please select a major.</div>
                       </div>
-
-                      <!-- Section Dropdown -->
-
                       <div class="col-md-2 mb-3">
                         <label for="year" class="form-label">Year</label>
-                        <select class="form-select  form-control" id="year" name="year" required>
+                        <select class="form-select form-control" id="year" name="year" required>
                           <option selected disabled>Select Year</option>
                           <option value="1">1st Year</option>
                           <option value="2">2nd Year</option>
                           <option value="3">3rd Year</option>
                           <option value="4">4th Year</option>
                         </select>
+                        <div class="invalid-feedback">Please select a year.</div>
                       </div>
-
                       <div class="col-md-2 mb-3">
                         <label for="section" class="form-label">Section</label>
                         <input type="text" class="form-control" id="section" name="section" placeholder="e.g., 3A" required />
+                        <div class="invalid-feedback">Section is required.</div>
                       </div>
                     </div>
 
                     <!-- Address Fields -->
                     <h5>Current Address</h5>
                     <div class="row">
-                      <!-- Region Dropdown -->
                       <div class="col-md-2 mb-3">
                         <label for="region" class="form-label">Region</label>
-                        <select class="form-select  form-control" id="region" name="region" required>
-                          <option selected disabled>Select Region</option>
-                          <!-- Options for Region will go here -->
+                        <select class="form-select form-control" id="region" name="region" required>
+                          <option selected disabled>Select Region</option>x
                         </select>
+                        <div class="invalid-feedback">Please select a region.</div>
                       </div>
 
-                      <!-- Province Dropdown -->
                       <div class="col-md-3 mb-3">
                         <label for="province" class="form-label">Province</label>
-                        <select class="form-select  form-control" id="province" name="province" required>
+                        <select class="form-select form-control" id="province" name="province" required>
                           <option selected disabled>Select Province</option>
-                          <!-- Options for Province will go here -->
                         </select>
+                        <div class="invalid-feedback">Please select a province.</div>
                       </div>
 
-                      <!-- Municipality Dropdown -->
                       <div class="col-md-3 mb-3">
                         <label for="municipality" class="form-label">Municipality</label>
-                        <select class="form-select  form-control" id="municipality" name="municipality" required>
+                        <select class="form-select form-control" id="municipality" name="municipality" required>
                           <option selected disabled>Select Municipality</option>
-                          <!-- Options for Municipality will go here -->
                         </select>
+                        <div class="invalid-feedback">Please select a municipality.</div>
                       </div>
 
-                      <!-- Barangay Dropdown -->
                       <div class="col-md-2 mb-3">
                         <label for="barangay" class="form-label">Barangay</label>
-                        <select class="form-select  form-control" id="barangay" name="barangay" required>
+                        <select class="form-select form-control" id="barangay" name="barangay" required>
                           <option selected disabled>Select Barangay</option>
-                          <!-- Options for Barangay will go here -->
                         </select>
+                        <div class="invalid-feedback">Please select a barangay.</div>
                       </div>
 
-                      <!-- Street Input (Text Field) -->
                       <div class="col-md-2 mb-3">
                         <label for="street" class="form-label">Purok/Block No./Street</label>
                         <input type="text" class="form-control" id="street" name="street" placeholder="Enter street address" />
                       </div>
                     </div>
 
-
                     <!-- Contact Information -->
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="email" class="form-label">Email Address</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+                        <div class="invalid-feedback">Please enter a valid email address.</div>
                       </div>
+
                       <div class="col-md-6 mb-3">
                         <label for="contactNumber" class="form-label">Contact Number</label>
                         <input type="tel" class="form-control" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required />
+                        <div class="invalid-feedback">Please enter a valid contact number.</div>
                       </div>
                     </div>
 
@@ -233,25 +231,22 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         <label for="emergencyContactName" class="form-label">Emergency Contact Name</label>
                         <input type="text" class="form-control" id="emergencyContactName" name="emergencyContactName" placeholder="Enter emergency contact name" />
                       </div>
+
                       <div class="col-md-3 mb-3">
                         <label for="relationship" class="form-label">Relationship</label>
                         <input type="text" class="form-control" id="relationship" name="relationship" placeholder="Enter relationship" />
                       </div>
+                      
                       <div class="col-md-3 mb-3">
                         <label for="emergencyContactNumber" class="form-label">Emergency Contact Number</label>
                         <input type="tel" class="form-control" id="emergencyContactNumber" name="emergencyContactNumber" placeholder="Enter emergency contact number" />
                       </div>
                     </div>
-
+                    
                     <div class="row">
                       <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary" id="addstudentpatient" name="addstudentpatient">
-                          Submit
-                        </button>
-
-                        <button type="button" class="btn btn-primary ms-3" id="canceladdpatient">
-                          Back
-                        </button>
+                        <button type="submit" class="btn btn-primary" id="addstudentpatient" name="addstudentpatient">Submit</button>
+                        <button type="button" class="btn btn-primary ms-3" id="canceladdpatient">Back</button>
                       </div>
                     </div>
                   </form>
@@ -358,7 +353,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         "Master of Science in Agriculture (MSA)": ["None"],
         "Master of Science in Land and Water Resource Technology (MS LawTreat)": ["None"],
         "Master of Science in Horticulture (MS Horti)": ["None"],
-        "Master of Science in Forestry (MSF)":["None"],
+        "Master of Science in Forestry (MSF)": ["None"],
         "Master of Science in Soil Science (MS Soil Science)": ["None"],
         "Master of Extension Education (MExEd)": ["None"],
         "Master of Science in Agricultural Extension (MS AgEx)": ["None"],
@@ -601,6 +596,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
         }
       });
     }
+
+
+    (function() {
+      'use strict';
+      const form = document.getElementById('studentForm');
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    })();
   </script>
 </body>
 

@@ -80,7 +80,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
               </div>
               <div class="card-body" id="InputInfo">
                 <!-- Form Starts Here -->
-                <form id="facultyForm" action="patientcontrol.php" method="POST" enctype="multipart/form-data">                  <!-- Name Fields -->
+                <form id="facultyForm" action="patientcontrol.php" method="POST" enctype="multipart/form-data" novalidate>                  
+                  <!-- Name Fields -->
                   <div class="row">
                   <div class="col-md-3 mb-3">
                         <label for="Profile" class="form-label">Profile Upload</label>
@@ -91,19 +92,23 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     <div class="col-md-3 mb-3">
                       <label for="lastName" class="form-label">Last Name</label>
                       <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" required />
+                      <div class="invalid-feedback">Last name is required.</div>
                     </div>
                     <div class="col-md-3 mb-3">
                       <label for="firstName" class="form-label">First Name</label>
                       <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" required />
+                      <div class="invalid-feedback">First name is required.</div>
                     </div>
                     <div class="col-md-2 mb-3">
                       <label for="middleName" class="form-label">Middle Name</label>
                       <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Enter middle name" />
                     </div>
+
                     <!-- Date of Birth -->
                     <div class="col-md-2 mb-3">
                       <label for="dob" class="form-label">Date of Birth</label>
                       <input type="date" class="form-control" id="dob" name="dob" required />
+                      <div class="invalid-feedback">Date of birth is required.</div>
                     </div>
                     <div class="col-md-2 mb-3">
                       <label for="sex" class="form-label">Sex</label>
@@ -112,22 +117,25 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <option value="Female">Female</option>
                       <option value="Male">Male</option>
                       </select>
+                      <div class="invalid-feedback">Please select a gender.</div>
                     </div>
                   </div>
 
-                  <!-- ID and Academic Info -->
+                  <!-- ID and Work Info -->
                   <div class="row">
                     <div class="col-md-2 mb-3">
                       <label for="facultyID" class="form-label">ID Number</label>
                       <input type="text" class="form-control" id="facultyID" name="facultyID" placeholder="Enter ID number" required />
+                      <div class="invalid-feedback">ID number is required.</div>
                     </div>
 
 
-                    <!-- Program Dropdown -->
+                    <!-- College Dropdown -->
                     <div class="col-md-4 mb-3">
                         <label for="college" class="form-label">College</label>
                         <select class="form-select form-control" id="college" name="college" required>
                         </select>
+                        <div class="invalid-feedback">Please select a college.</div>
                     </div>
 
                     <!-- department Dropdown -->
@@ -136,11 +144,13 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                         <select class="form-select form-control" id="department" name="department" required>
                             <option value="">Select or add a department</option>
                         </select>
+                        <div class="invalid-feedback">Please select a department.</div>
                     </div>
 
                     <div class="col-md-2 mb-3">
                       <label for="role" class="form-label">Role</label>
                       <input type="text" class="form-control" id="role" name="role" placeholder="Enter Role" required />
+                      <div class="invalid-feedback">Please select a role.</div>
                     </div>
                   </div>
 
@@ -152,7 +162,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <label for="region" class="form-label">Region</label>
                       <select class="form-select  form-control" id="region" name="region" required>
                         <option value="" disabled selected>Select Region</option>
-                        <!-- Options for Region will go here -->
+                        <div class="invalid-feedback">Please select a region.</div>
                       </select>
                     </div>
 
@@ -161,8 +171,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <label for="province" class="form-label">Province</label>
                       <select class="form-select  form-control" id="province" name="province" required>
                         <option value="" disabled selected >Select Province</option>
-                        <!-- Options for Province will go here -->
                       </select>
+                      <div class="invalid-feedback">Please select a province.</div>
                     </div>
 
                     <!-- Municipality Dropdown -->
@@ -171,6 +181,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <select class="form-select  form-control" id="municipality" name="municipality" required>
                           <option value="" disabled selected>Select Municipality</option>                        
                       </select>
+                      <div class="invalid-feedback">Please select a municipality.</div>
                     </div>
 
                     <!-- Barangay Dropdown -->
@@ -179,6 +190,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <select class="form-select  form-control" id="barangay" name="barangay" required>
                         <option value="" disabled selected>Select Barangay</option>                        
                       </select>
+                      <div class="invalid-feedback">Please select a barangay.</div>
                     </div>
 
                     <!-- Street Input (Text Field) -->
@@ -194,10 +206,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     <div class="col-md-6 mb-3">
                       <label for="email" class="form-label">Email Address</label>
                       <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required />
+                      <div class="invalid-feedback">Please enter a valid email address.</div>
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="contactNumber" class="form-label">Contact Number</label>
                       <input type="tel" class="form-control" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required />
+                      <div class="invalid-feedback">Please enter a valid contact number.</div>
                     </div>
                   </div>
  
@@ -220,13 +234,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
                   <div class="row">
                     <div class="col-md-12 text-center">
-                      <button type="submit" class="btn btn-primary" id="addfacultypatient" name="addfacultypatient">
-                        Submit
-                      </button>
-                      
-                      <button type="button" class="btn btn-primary ms-3" id="canceladdpatient">
-                        Back
-                      </button>
+                        <button type="submit" class="btn btn-primary" id="addstaffpatient" name="addstaffpatient">Submit</button>
+                        <button type="button" class="btn btn-primary ms-3" id="canceladdpatient">Back</button>
                     </div>
                   </div>
                 </form>
@@ -563,6 +572,22 @@ function confirmCancelPatient() {
         }
     });
 }
+// JavaScript to apply custom Bootstrap validation
+(function() {
+      'use strict';
+
+      // Fetch the form element
+      const form = document.getElementById('facultyForm');
+
+      // Apply Bootstrap validation styles
+      form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    })();
 
 
 </script>
