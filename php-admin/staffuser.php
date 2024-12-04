@@ -15,7 +15,7 @@ $user = new User($conn);
 $user_id = $_SESSION['user_id'];
 $userData = $user->getUserData($user_id);  
 ?>
- 
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>

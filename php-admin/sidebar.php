@@ -130,13 +130,13 @@ session_start();
               <li class="nav-item" id="inventory-item">
                 <a href="inventory.php">
                   <i class="fas fas fa-clipboard-list"></i>
-                  <p>Medicine Report</p> 
+                  <p>Medicine Reports</p> 
                 </a>
               </li>
               <li class="nav-item" id="reports-item">
                 <a href="reports.php"> 
                   <i class="fas fas fa-file-medical"></i>
-                  <p>Transaction Report</p>
+                  <p>Transaction Reports</p>
                 </a>
               </li>
               <li class="nav-item" id="staffuser-item">

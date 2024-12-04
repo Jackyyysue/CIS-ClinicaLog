@@ -160,3 +160,37 @@ body {
         font-size: 16px;
     }
 }
+
+/* Small Screens (Phones) */
+@media (max-width: 320px) {
+    body {
+        background-image: url("../assets/img/background-small.png"); /* Optimized background for small screens */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    #logo {
+        width: 120px; /* Further reduced size */
+        height: auto;
+        margin-left: -17px;
+    }
+
+    #name {
+        font-size: 42px; /* Smaller font size for mobile */
+    }
+
+    .line1, .line2 {
+        font-size: 24px; /* Adjusted font size */
+    }
+
+    .button {
+        width: 180px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .button .arrow {
+        font-size: 16px;
+    }
+}
